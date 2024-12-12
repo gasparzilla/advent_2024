@@ -2,7 +2,7 @@ import numpy as np
 
 a = []
 
-with open("input2.txt", 'r') as file:
+with open("input_2.txt", 'r') as file:
     a= file.read().splitlines()
     
 a = list(map(lambda x: x.split(' '), a))

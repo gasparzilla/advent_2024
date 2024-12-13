@@ -29,15 +29,45 @@ def list_in(l1,l2):
             return False
     return True
 
-clas = []
-res = 0
-
-for ps in pages:
+def check_order(ps):
     ok = True
     for i in range(len(ps)):
         p = ps[i]
         ok = ok and list_in(ps[:i],after[p]) and list_in(ps[i+1:],before[p])
+    return ok
+
+def fix_order(ps):
+    for i in ps:
+        # l = 0
+        order = []
+        r = 0
+        for j in ps:
+            if i != j:
+                # l += j in before[i]
+                r += j in after[i]
+            order += [r]
+    # return [x for _, x in sorted(zip(order, ps))]
+    return order
+
+clas = []
+res = 0
+res_2 = 0
+
+for ps in pages:
+    ok = check_order(ps)
     clas += [ok]
     if ok:
         res += int(ps[int(len(ps)/2)])
+    else:
+        ps_o = fix_order(ps)
+        res_2 += int(ps_o[int(len(ps_o)/2)])
         
+print(res)
+
+print(res_2)
+
+test = pages[56]
+test
+fix_order(test)
+check_order(test)
+# check_order(fix_order(test))
